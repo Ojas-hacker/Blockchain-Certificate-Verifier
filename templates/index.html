@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron text-center">
+    <h1 class="display-4">Welcome to CertChain</h1>
+    <p class="lead">A blockchain-based certificate verification system</p>
+    <hr class="my-4">
+    <p>Issue, verify, and manage digital certificates with the power of blockchain technology.</p>
+    <div class="mt-4">
+        <a class="btn btn-primary btn-lg me-2" href="{{ url_for('verify_certificate') }}" role="button">Verify a Certificate</a>
+        {% if not current_user.is_authenticated %}
+            <a class="btn btn-outline-primary btn-lg me-2" href="{{ url_for('login') }}" role="button">Login</a>
+            <a class="btn btn-outline-secondary btn-lg" href="{{ url_for('register') }}" role="button">Register</a>
+        {% else %}
+            <a class="btn btn-outline-primary btn-lg" href="{{ url_for('dashboard') }}" role="button">Go to Dashboard</a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Secure & Tamper-Proof</h5>
+                <p class="card-text">Certificates are stored on a blockchain, ensuring they cannot be altered or forged.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Easy Verification</h5>
+                <p class="card-text">Verify the authenticity of any certificate in seconds with just the certificate ID.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Role-Based Access</h5>
+                <p class="card-text">Different roles for super admins, institutional admins, and end users.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

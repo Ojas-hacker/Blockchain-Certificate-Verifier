@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block title %}Verification Result - {{ super() }}{% endblock %}
+
+{% block content %}
+{% if certificate %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">Certificate Verification</h4>
+                    {% if is_valid %}
+                        <span class="badge bg-success">VERIFIED</span>
+                    {% else %}
+                        <span class="badge bg-danger">INVALID</span>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="card-body">
+                {% if is_valid %}
+                    <div class="text-center mb-4">
+                        <i class="bi bi-patch-check-fill text-success" style="font-size: 4rem;"></i>
+                        <h3 class="mt-3">Certificate Verified</h3>
+                        <p class="text-muted">This certificate has been verified and is authentic.</p>
+                    </div>
+                    
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="mb-2 text-muted">Certificate ID</p>
+                                    <h5>{{ certificate.certificate_id }}</h5>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-2 text-muted">Issued On</p>
+                                    <h5>{{ certificate.issue_date.strftime('%B %d, %Y') }}</h5>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="mb-2 text-muted">Recipient Name</p>
+                                    <h4>{{ certificate.recipient_name }}</h4>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-2 text-muted">Course/Program</p>
+                                    <h4>{{ certificate.course_name }}</h4>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="mb-2 text-muted">Issued By</p>
+                                    <h5>{{ certificate.institution }}</h5>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-2 text-muted">Verification Date</p>
+                                    <h5>{{ now.strftime('%B %d, %Y') }}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <div class="d-flex">
+                            <div class="me-3">
+                                <i class="bi bi-info-circle-fill"></i>
+                            </div>
+                            <div>
+                                <p class="mb-0">This certificate has been recorded on the blockchain and its authenticity has been verified. The information presented here matches the official records.</p>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="text-center py-5">
+                        <i class="bi bi-exclamation-triangle-fill text-danger" style="font-size: 4rem;"></i>
+                        <h3 class="mt-3">Certificate Not Found</h3>
+                        <p class="text-muted mb-4">The certificate ID you entered could not be found in our records.</p>
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="{{ url_for('verify_certificate') }}" class="btn btn-primary">
+                                <i class="bi bi-arrow-left"></i> Try Another ID
+                            </a>
+                            <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">
+                                <i class="bi bi-house"></i> Return Home
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="text-center mt-3">
+            <a href="{{ url_for('verify_certificate') }}" class="text-decoration-none">
+                <i class="bi bi-search"></i> Verify another certificate
+            </a>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-danger text-white">
+                <h4 class="mb-0">Verification Failed</h4>
+            </div>
+            <div class="card-body text-center py-5">
+                <i class="bi bi-exclamation-triangle-fill text-danger" style="font-size: 4rem;"></i>
+                <h3 class="mt-4">Certificate Not Found</h3>
+                <p class="text-muted mb-4">The certificate ID you entered could not be found in our records.</p>
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="{{ url_for('verify_certificate') }}" class="btn btn-primary">
+                        <i class="bi bi-arrow-left"></i> Try Another ID
+                    </a>
+                    <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">
+                        <i class="bi bi-house"></i> Return Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

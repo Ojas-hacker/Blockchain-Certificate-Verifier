@@ -1,0 +1,15 @@
+Flask
+Flask-SQLAlchemy
+Flask-Login
+Flask-WTF
+cryptography
+pyjwt
+python-dotenv
+web3
+eth-account
+Werkzeug
+SQLAlchemy
+Jinja2
+itsdangerous
+click
+MarkupSafe

@@ -28,7 +28,7 @@ A secure and decentralized certificate verification system built with Python, Fl
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/blockchain-certificate-verifier.git
+   git clone https://github.com/Ojas-hacker/Blockchain-Certificate-Verifier.git
    cd blockchain-certificate-verifier
    ```
 
